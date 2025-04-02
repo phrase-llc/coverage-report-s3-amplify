@@ -62,3 +62,5 @@ runs:
       run: |
         echo "## Coverage Report" >> $GITHUB_STEP_SUMMARY
         echo "${{ inputs.AMPLIFY_HOST_URL }}/artifacts/${{ github.repository }}/${{ inputs.BRANCH_NAME }}/${{ github.run_id }}/${INPUT_COVERAGE_SUBDIRECTORY}/" >> $GITHUB_STEP_SUMMARY
+      env:
+        INPUT_COVERAGE_SUBDIRECTORY: ${{ inputs.COVERAGE_SUBDIRECTORY || 'coverage' }}

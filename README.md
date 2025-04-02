@@ -1,0 +1,1 @@
+# coverage-report-s3-amplify

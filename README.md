@@ -63,7 +63,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-          BRANCH_NAME: ${{ env.GITHUB_REF_NAME }}
+          BRANCH_NAME: ${{ github.ref_name }}
           AMPLIFY_APP_ID: ${{ vars.AMPLIFY_APP_ID }}
           AMPLIFY_HOST_URL: ${{ vars.AMPLIFY_HOST_URL }}
 ```

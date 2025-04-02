@@ -6,7 +6,7 @@ This GitHub Action automates the process of uploading coverage report artifacts 
 
 The action performs the following tasks:
 
-- **S3 Upload:** Uploads coverage artifacts from a specified directory to an S3 bucket at the path `artifacts/<BRANCH_NAME>/<RUN_ID>/`.
+- **S3 Upload:** Uploads coverage artifacts from a specified directory to an S3 bucket at the path `artifacts/<REPOSITORY_NAME>/<BRANCH_NAME>/<RUN_ID>/`.
 - **Amplify Deployment:** Initiates a deployment on AWS Amplify using the uploaded artifacts as the source for the `main` branch.
 - **Report Link Addition:** Appends the generated coverage report URL to the GitHub Actions step summary for easy reference.
 

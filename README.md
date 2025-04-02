@@ -67,6 +67,8 @@ jobs:
           AMPLIFY_APP_ID: ${{ vars.AMPLIFY_APP_ID }}
           AMPLIFY_HOST_URL: ${{ vars.AMPLIFY_HOST_URL }}
 ```
+> **Note:** If you register `AMPLIFY_APP_ID` as a secret and specify the default URL provided by Amplify for `AMPLIFY_HOST_URL`, the URL displayed in the step summary may be masked, causing the link to not function correctly. To resolve this issue, either assign a custom domain to your Amplify application or register `AMPLIFY_APP_ID` as a Repository variable instead of a secret.
+
 
 ## Prerequisites
 

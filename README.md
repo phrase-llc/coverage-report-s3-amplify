@@ -20,15 +20,16 @@ The action performs the following tasks:
 
 The action requires the following inputs:
 
-| Input Name              | Description                                             | Required |
-| ----------------------- | ------------------------------------------------------- | -------- |
-| `AWS_ACCESS_KEY_ID`     | Your AWS Access Key ID                                  | Yes      |
-| `AWS_SECRET_ACCESS_KEY` | Your AWS Secret Access Key                              | Yes      |
-| `BUCKET_NAME`           | Name of the S3 bucket                                   | Yes      |
-| `AWS_DEFAULT_REGION`    | AWS region                                              | Yes      |
-| `BRANCH_NAME`           | Branch name (e.g., `main`, `develop`)                   | Yes      |
-| `AMPLIFY_APP_ID`        | AWS Amplify Application ID                              | Yes      |
-| `AMPLIFY_HOST_URL`      | Amplify Host URL (used to create the report link)       | Yes      |
+| Input Name              | Description                                             | Required | Default    |
+| ----------------------- | ------------------------------------------------------- | -------- | ---------- |
+| `AWS_ACCESS_KEY_ID`     | Your AWS Access Key ID                                  | Yes      |            |
+| `AWS_SECRET_ACCESS_KEY` | Your AWS Secret Access Key                              | Yes      |            |
+| `BUCKET_NAME`           | Name of the S3 bucket                                   | Yes      |            |
+| `AWS_DEFAULT_REGION`    | AWS region                                              | Yes      |            |
+| `BRANCH_NAME`           | Branch name (e.g., `main`, `develop`)                   | Yes      |            |
+| `AMPLIFY_APP_ID`        | AWS Amplify Application ID                              | Yes      |            |
+| `AMPLIFY_HOST_URL`      | Amplify Host URL (used to create the report link)       | Yes      |            |
+| `COVERAGE_SUBDIRECTORY` | Subdirectory for coverage artifacts                     | No       | `coverage` |
 
 ## Usage
 
@@ -66,6 +67,7 @@ jobs:
           BRANCH_NAME: ${{ env.GITHUB_REF_NAME }}
           AMPLIFY_APP_ID: ${{ vars.AMPLIFY_APP_ID }}
           AMPLIFY_HOST_URL: ${{ vars.AMPLIFY_HOST_URL }}
+          COVERAGE_SUBDIRECTORY: coverage
 ```
 > **Note:** If you register `AMPLIFY_APP_ID` as a secret and specify the default URL provided by Amplify for `AMPLIFY_HOST_URL`, the URL displayed in the step summary may be masked, causing the link to not function correctly. To resolve this issue, either assign a custom domain to your Amplify application or register `AMPLIFY_APP_ID` as a Repository variable instead of a secret.
 

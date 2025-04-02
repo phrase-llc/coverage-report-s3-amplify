@@ -22,6 +22,10 @@ inputs:
   AMPLIFY_HOST_URL:
     description: 'Amplify Host URL'
     required: true
+  COVERAGE_SUBDIRECTORY:
+    description: 'Subdirectory for coverage artifacts'
+    required: false
+    default: 'coverage'
 
 runs:
   using: "composite"
@@ -29,14 +33,15 @@ runs:
     - name: Upload coverage artifact to S3
       shell: bash
       run: |
-        echo "Uploading coverage artifact to S3 under ${{ github.repository }}/${INPUT_BRANCH_NAME}/"
-        aws s3 cp coverage/ s3://${INPUT_BUCKET_NAME}/artifacts/${{ github.repository }}/${INPUT_BRANCH_NAME}/${{ github.run_id }}/ --recursive
+        echo "Uploading coverage artifact to S3 under ${{ github.repository }}/${INPUT_BRANCH_NAME}/${{ github.run_id }}/${INPUT_COVERAGE_SUBDIRECTORY}/"
+        aws s3 cp ${INPUT_COVERAGE_SUBDIRECTORY}/ s3://${INPUT_BUCKET_NAME}/artifacts/${{ github.repository }}/${INPUT_BRANCH_NAME}/${{ github.run_id }}/${INPUT_COVERAGE_SUBDIRECTORY}/ --recursive
       env:
         AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: ${{ inputs.AWS_DEFAULT_REGION }}
         INPUT_BUCKET_NAME: ${{ inputs.BUCKET_NAME }}
         INPUT_BRANCH_NAME: ${{ inputs.BRANCH_NAME }}
+        INPUT_COVERAGE_SUBDIRECTORY: ${{ inputs.COVERAGE_SUBDIRECTORY || 'coverage' }}
 
     - name: Start Amplify deployment
       shell: bash
@@ -56,4 +61,4 @@ runs:
       shell: bash
       run: |
         echo "## Coverage Report" >> $GITHUB_STEP_SUMMARY
-        echo "${{ inputs.AMPLIFY_HOST_URL }}/artifacts/${{ github.repository }}/${{ inputs.BRANCH_NAME }}/${{ github.run_id }}/" >> $GITHUB_STEP_SUMMARY
+        echo "${{ inputs.AMPLIFY_HOST_URL }}/artifacts/${{ github.repository }}/${{ inputs.BRANCH_NAME }}/${{ github.run_id }}/${INPUT_COVERAGE_SUBDIRECTORY}/" >> $GITHUB_STEP_SUMMARY

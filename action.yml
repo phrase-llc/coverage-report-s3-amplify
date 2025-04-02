@@ -30,7 +30,7 @@ runs:
       shell: bash
       run: |
         echo "Uploading coverage artifact to S3 under ${INPUT_BRANCH_NAME}/"
-        aws s3 cp coverage/ s3://${INPUT_BUCKET_NAME}/artifacts/${INPUT_BRANCH_NAME}/ --recursive
+        aws s3 cp coverage/ s3://${INPUT_BUCKET_NAME}/artifacts/${INPUT_BRANCH_NAME}/${{ github.run_id }}/ --recursive
       env:
         AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
@@ -56,4 +56,4 @@ runs:
       shell: bash
       run: |
         echo "## Coverage Report" >> $GITHUB_STEP_SUMMARY
-        echo "${{ inputs.AMPLIFY_HOST_URL }}/artifacts/${{ inputs.BRANCH_NAME }}/" >> $GITHUB_STEP_SUMMARY
+        echo "${{ inputs.AMPLIFY_HOST_URL }}/artifacts/${{ inputs.BRANCH_NAME }}/${{ github.run_id }}/" >> $GITHUB_STEP_SUMMARY

@@ -6,7 +6,7 @@ This GitHub Action automates the process of uploading coverage report artifacts 
 
 The action performs the following tasks:
 
-- **S3 Upload:** Uploads coverage artifacts from a specified directory to an S3 bucket at the path `artifacts/<BRANCH_NAME>/`.
+- **S3 Upload:** Uploads coverage artifacts from a specified directory to an S3 bucket at the path `artifacts/<BRANCH_NAME>/<RUN_ID>/`.
 - **Amplify Deployment:** Initiates a deployment on AWS Amplify using the uploaded artifacts as the source for the `main` branch.
 - **Report Link Addition:** Appends the generated coverage report URL to the GitHub Actions step summary for easy reference.
 
@@ -68,7 +68,6 @@ jobs:
           AMPLIFY_HOST_URL: ${{ vars.AMPLIFY_HOST_URL }}
 ```
 > **Note:** If you register `AMPLIFY_APP_ID` as a secret and specify the default URL provided by Amplify for `AMPLIFY_HOST_URL`, the URL displayed in the step summary may be masked, causing the link to not function correctly. To resolve this issue, either assign a custom domain to your Amplify application or register `AMPLIFY_APP_ID` as a Repository variable instead of a secret.
-
 
 ## Prerequisites
 
